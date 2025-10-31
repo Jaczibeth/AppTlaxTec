@@ -1,18 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import Indicador from '../components/Indicador';
+import { StyleSheet, Text, View, } from 'react-native'
+
+import { Appbar } from 'react-native-paper';
 export default function Home() {
-  return (
-       <View  style ={styles.container} >
-      <Text>Home Jaczibeth</Text>
-      <Indicador/>
-    </View>
-  );
+    return (
+        <View   >
+            <Appbar.Header>
+                <Appbar.Content title="Bienvenidos" />
+            </Appbar.Header>
+        </View>
+    );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
