@@ -1,5 +1,6 @@
 import { View, } from 'react-native'
 import { Appbar , Card, Text,Icon, MD3Colors} from 'react-native-paper';
+import Lista from '../components/Lista';
 export default function Home() {
     return (
         <View   >
@@ -18,6 +19,7 @@ export default function Home() {
     color={MD3Colors.error50}
     size={20}
   />
+  <Lista/>
         </View>
     );
 }
