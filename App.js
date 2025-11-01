@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { PaperProvider } from 'react-native-paper';
-import Home from './src/pages/Home';
+import { List, PaperProvider } from 'react-native-paper';
 
+import ListaAlumnos from './src/pages/ListaAlumnos';
 export default function App() {
   return (
    
-     <PaperProvider>
-  
-      <Home/>
+     <PaperProvider>    
+      <ListaAlumnos/>
     </PaperProvider>
   );
 }
