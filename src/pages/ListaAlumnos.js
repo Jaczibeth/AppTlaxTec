@@ -1,10 +1,11 @@
 import { View, } from 'react-native'
-import { Appbar, Card, Text, Icon, MD3Colors, Surface, DefaultTheme, PaperProvider,Button, ActivityIndicator } from 'react-native-paper';
+import { Appbar, Card, Text, Icon, MD3Colors, Surface, DefaultTheme, PaperProvider,Button, ActivityIndicator, IconButton } from 'react-native-paper';
 import Lista from '../components/Lista';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { use, useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { AlumnosService } from '../API/services';
 import React from 'react';
+import CardActions from 'react-native-paper/lib/typescript/components/Card/CardActions';
 const theme = {
     ...DefaultTheme,
       roundness:12,
@@ -14,7 +15,8 @@ const theme = {
         accent: '#88cdf7ff',
         background: '#f1e0e0de',
         Surface: '#e4cbcbff',
-        text: '#000000'
+        text: '#000000',
+        error: '#B00020',
     }
 }
 export default function ListaAlumnos() {
@@ -70,6 +72,16 @@ export default function ListaAlumnos() {
                                         title={alumno.name} 
                                         subtitle={`ID: ${alumno.numeroControl}`} />
                                       left={(props) => <List.Icon {...props} icon="account" />}
+                                      <CardActions>
+                                        <View style  ={{flex:1}}/>
+                                          <IconButton icon='eye' iconColor={theme.colors.primary}
+                                          onPress={()=> console.log('Btn presionado ver' , alumno.id)}
+                                          />
+                                          <IconButton icon='delete' iconColor={theme.colors.error}
+                                          onPress={()=> console.log('Btn presionado eliminar ' , alumno.id)}
+                                          />
+                                        
+                                      </CardActions>
                                     </Card>
                                 ))}
                             </ScrollView>
