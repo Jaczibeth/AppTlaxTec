@@ -1,15 +1,17 @@
 import { View, } from 'react-native'
-import { Appbar, Card, Text, Icon, MD3Colors, Surface, DefaultTheme, PaperProvider,Button } from 'react-native-paper';
+import { Appbar, Card, Text, Icon, MD3Colors, Surface, DefaultTheme, PaperProvider,Button, ActivityIndicator } from 'react-native-paper';
 import Lista from '../components/Lista';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { use, useEffect, useState } from 'react';
 import { AlumnosService } from '../API/services';
 import React from 'react';
 const theme = {
+    ...DefaultTheme,
+      roundness:12,
     colors: {
         ...DefaultTheme.colors,
-        primary: '#3f51b5',
-        accent: '#f50057',
+        primary: '#5467d5ff',
+        accent: '#88cdf7ff',
         background: '#f1e0e0de',
         Surface: '#e4cbcbff',
         text: '#000000'
@@ -50,10 +52,9 @@ export default function ListaAlumnos() {
                     </Appbar.Header>
                     {
                         loading ? (
-
-
                             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                                <Text>Cargando alumnos...</Text>
+                                <ActivityIndicator animating={true} size="large" color={MD3Colors.primary50} />
+                                <Text style={{ marginTop: 10 }}>Cargando alumnos...</Text>
                             </View>
                         ) : error ? (
                             <View
@@ -62,17 +63,13 @@ export default function ListaAlumnos() {
                                 <Button mode="contained" onPress={load}> Reintentar </Button>
                             </View>
                         ) : (
-                            <ScrollView contentContainerStyle={{ padding: 16 }}>
+                            <ScrollView   contentContainerStyle={styles.ScrollContainer }>
                                 {data.map((alumno) => (
-                                    <Card key={alumno.id} style={{ marginBottom: 16 }}>
-                                        <Card.Title title={alumno.name} subtitle={`ID: ${alumno.id}`} />
-                                        <Card.Content>
-                                            <Text>NC: {alumno.numeroControl }</Text>
-                                            <Text>Telefono: {alumno.telefono }</Text>
-                                            <Text>Email: {alumno.email}</Text>
-                                            <Text>Carrera: {alumno.carrera }</Text>
-                                            <Text>URL: {alumno.imagenURL }</Text>
-                                        </Card.Content>
+                                    <Card key={alumno.id} style={styles.card}>
+                                        <Card.Title  
+                                        title={alumno.name} 
+                                        subtitle={`ID: ${alumno.numeroControl}`} />
+                                      left={(props) => <List.Icon {...props} icon="account" />}
                                     </Card>
                                 ))}
                             </ScrollView>
@@ -83,3 +80,13 @@ export default function ListaAlumnos() {
         </SafeAreaProvider>
     );
 }
+
+const styles = styleSheet.create({
+    ScrollContainer: {
+        padding: 16
+    },
+    card: {
+        marginBottom: 10,
+        borderRadius: 10},
+    }
+);
